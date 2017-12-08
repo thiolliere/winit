@@ -49,6 +49,7 @@ impl EventsLoop {
         where F: FnMut(::Event)
     {
         while let Ok(event) = self.event_rx.try_recv() {
+            android_glue::write_log(&format!("LOGEVENT {:?}", event));
 
             let e = match event{
                 android_glue::Event::EventMotion(motion) => {
